@@ -1,0 +1,101 @@
+[
+  {
+    "name": "New Years {year}",
+    "backgroundImage": "newyears.jpg",
+    "imageAttribution": "Image: WallpaperAccess Free New Year's Eve Backgrounds",
+    "useDark": false,
+    "date": {
+      "month": 1,
+      "day": 1,
+      "useLocalOffset": true
+    }
+  },
+  {
+    "name": "My Birthday",
+    "backgroundImage": "birthday.jpg",
+    "imageAttribution": "Image: WallpaperSafari Ha[py birthday cake wallpaper",
+    "useDark": true,
+    "date": {
+      "month": 3,
+      "day": 6,
+      "useLocalOffset": true
+    }
+  },
+  {
+    "name": "Winter {year}",
+    "backgroundImage": "winter.jpg",
+    "imageAttribution": "Image: Wallpaper Cave, Winter Wallpapers",
+    "useDark": true,
+    "date": {
+      "month": 12,
+      "day": 21,
+      "useLocalOffset": true
+    }
+  },
+  {
+    "name": "Spring {year}",
+    "backgroundImage": "spring.jpg",
+    "imageAttribution": "Image: WallpaperAccess, Top Free Spring Backgrounds",
+    "useDark": true,
+    "date": {
+      "month": 3,
+      "day": 20,
+      "useLocalOffset": true
+    }
+  },
+  {
+    "name": "Summer",
+    "backgroundImage": "summer.jpg",
+    "imageAttribution": "Image: Thrive Global, The Beauty of the Summer Months",
+    "useDark": true,
+    "date": {
+      "month": 6,
+      "day": 20,
+      "useLocalOffset": true
+    }
+  },
+  {
+    "name": "Fall {year}",
+    "backgroundImage": "fall.jpg",
+    "imageAttribution": "Image: Wallpaper Cave, Autumn Wallpapers",
+    "useDark": false,
+    "date": {
+      "month": 9,
+      "day": 22,
+      "useLocalOffset": true
+    }
+  },
+  {
+    "name": "US Independence Day {year}",
+    "backgroundImage": "july4.jpg",
+    "imageAttribution": "Image: WallpaperAccess, Christmas Wallpapers",
+    "useDark": false,
+    "date": {
+      "month": 7,
+      "day": 4,
+      "useLocalOffset": true
+    }
+  },
+  {
+    "name": "Halloween {year}",
+    "backgroundImage": "halloween.jpg",
+    "imageAttribution": "Image: Wallpaper Cave, Halloween Pumpkin Wallpapers",
+    "useDark": false,
+    "date": {
+      "month": 10,
+      "day": 31,
+      "useLocalOffset": true
+    }
+  },
+  {
+    "name": "Christmas {year}",
+    "backgroundImage": "christmas.jpg",
+    "imageAttribution": "Image: WallpaperAccess, Christmas Wallpapers",
+    "useDark": false,
+    "date": {
+      "month": 12,
+      "day": 25,
+      "useLocalOffset": true
+    }
+  }
+]

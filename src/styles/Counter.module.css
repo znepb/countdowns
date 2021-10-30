@@ -1,0 +1,52 @@
+.black { color: #000 }
+.white { color: #fff }
+
+.container {
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.title {
+  font-size: 3rem;
+  font-weight: bold;
+  margin-bottom: 0.4rem;
+  text-align: center;
+}
+
+.when {
+  font-size: 1.5rem;
+  margin-bottom: 2rem;
+  text-align: center;
+}
+
+.ticker {
+  padding: 0px 1rem;
+  font-size: 4rem;
+  font-weight: bold;
+  border-radius: 1rem;
+  background: rgba(44, 44, 44, 0.3);
+  color: #fff;
+  backdrop-filter: blur(1rem);
+}
+
+.colon {
+  font-weight: bold;
+  font-size: 4rem;
+  margin: 0.5rem;
+}
+
+@media only screen and (max-width: 670px) {
+  .ticker {
+    padding: 0px;
+    background: transparent;
+  }
+
+  .when {
+    margin-bottom: 0.5rem;
+  }
+
+  .tickerDark {
+    color: black;
+  }
+}
