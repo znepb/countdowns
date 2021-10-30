@@ -37,6 +37,8 @@ const Home = (props: CountdownsProps) => {
   const [confetti, setConfetti] = useState(new ConfettiWorker([]));
   const [intervalId, setId] = useState(-1);
 
+  const [popupVisible, setPopupVisible] = useState(false);
+
   const [okay, setOkay] = useState(true);
 
   let interval: any;
@@ -95,7 +97,9 @@ const Home = (props: CountdownsProps) => {
         src={bgImage} layout="fill"
         objectFit="cover"
         quality={1}
-        placeholder="empty">
+        placeholder="empty"
+        loading="eager"
+        priority={true}>
     </Image>
 
     <div className={styles.main}>
@@ -105,7 +109,7 @@ const Home = (props: CountdownsProps) => {
           <section className={styles.center}>
             <section className={styles.select}>
               <img onClick={() => { setCurrent(Number(current) - 1) }} style={{ opacity: current == 0 ? 0 : 1, pointerEvents: current == 0 ? "auto" : "none" }} className={`${styles.naviSecondary} ${styles.iconTop} ${usingDark ? undefined : styles.icoInvert}`} src="/icons/chevron-left.svg" />
-              <img className={`${styles.iconTop} ${usingDark ? undefined : styles.icoInvert}`} src="/icons/menu.svg" />
+              <img onClick={() => { setPopupVisible(true) } }className={`${styles.iconTop} ${usingDark ? undefined : styles.icoInvert}`} src="/icons/menu.svg" />
               <img onClick={() => { setCurrent(Number(current) + 1) }} style={{ opacity: current == countdowns.length - 1 ? 0 : 1, pointerEvents: countdowns.length - 1 ? "auto" : "none" }} className={`${styles.naviSecondary} ${styles.iconTop} ${usingDark ? undefined : styles.icoInvert}`} src="/icons/chevron-right.svg" />
             </section>
 
@@ -122,6 +126,35 @@ const Home = (props: CountdownsProps) => {
       </div>
     </div>
     
+    <div className={styles.popupContainer} style={{ display: popupVisible ? "flex" : "none" }}>
+      <div className={styles.popup}>
+        <div className={styles.popupHeader}><span>Countdowns</span> <span style={{cursor: "pointer", userSelect: "none"}}onClick={() => {setPopupVisible(false);}}>&times;</span></div>
+        <div className={styles.pages}>
+          {countdowns.map(
+            (item, index) => {
+              const date = getDateFromCountdown(countdown, new Date());
+
+              if(eventIsToday(countdown, new Date(), date)) {
+                if(!countdown.date.year) { date.setFullYear(date.getFullYear() - 1) }
+              }
+
+              return (<div key={index} onClick={() => {setCurrent(index); setPopupVisible(false);}} className={styles.page} style={{backgroundImage: `url("/img/${item.backgroundImage}")`}}>
+                <span style={{color: !item.useDark ? "white" : undefined}}>{item.name.replace(/{year}/g, date.getFullYear().toString())}</span>
+              </div>)
+            }
+          )}
+        </div>
+        <div className={styles.popupFooter}>
+          <div className={styles.footerPowered}>
+            <span>v4.0.0</span>
+            <span>Powered by NextJS</span>
+          </div>
+          <div className={styles.github}>
+            <a href="https://github.com/znepb/countdowns">Check this out on GitHub</a>
+          </div>
+        </div>
+      </div>
+    </div>
   </>
 }
 
