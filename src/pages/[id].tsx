@@ -11,20 +11,15 @@ import Image from 'next/image'
 
 import { Countdown } from '../types';
 import { getDateFromCountdown, eventIsToday } from "../timeutils";
-import { Router } from 'next/dist/client/router';
 
 interface CountdownsProps {
   countdowns: Countdown[];
   id: number;
 }
 
-const myLoader = ({ src, width, quality }: any) => {
-  return `https://example.com/${src}?w=${width}&q=${quality || 75}`
-}
-
 const Home = (props: CountdownsProps) => {
   const countdowns = props.countdowns;
-  const router = useRouter()
+  const router = useRouter();
 
   const [current, setCurrent] = useState(props.id);
   const [time, setTime] = useState(Date.now());
@@ -37,11 +32,11 @@ const Home = (props: CountdownsProps) => {
   const [confetti, setConfetti] = useState(new ConfettiWorker([]));
   const [intervalId, setId] = useState(-1);
 
+  const [changelogVisible, setChangelogVisible] = useState(false);
   const [popupVisible, setPopupVisible] = useState(false);
 
   const [okay, setOkay] = useState(true);
 
-  let interval: any;
   let countdown = countdowns[current];
 
   const images = {};
@@ -84,6 +79,10 @@ const Home = (props: CountdownsProps) => {
       setOkay(false);
     }
   }, [current])
+
+  useEffect(() => {
+    setChangelogVisible(false);
+  }, [popupVisible])
 
   return <>
     <Head>
@@ -128,25 +127,43 @@ const Home = (props: CountdownsProps) => {
     
     <div className={styles.popupContainer} style={{ display: popupVisible ? "flex" : "none" }}>
       <div className={styles.popup}>
-        <div className={styles.popupHeader}><span>Countdowns</span> <span style={{cursor: "pointer", userSelect: "none"}}onClick={() => {setPopupVisible(false);}}>&times;</span></div>
-        <div className={styles.pages}>
-          {countdowns.map(
-            (item, index) => {
-              const date = getDateFromCountdown(countdown, new Date());
+        <div className={styles.popupHeader}><span>{changelogVisible ? "Changelog" : "Countdowns"}</span> <span style={{cursor: "pointer", userSelect: "none"}}onClick={() => {setPopupVisible(false);}}>&times;</span></div>
+        {!changelogVisible ? 
+          <div className={styles.pages}>
+            {countdowns.map(
+              (item, index) => {
+                const date = getDateFromCountdown(countdown, new Date());
 
-              if(eventIsToday(countdown, new Date(), date)) {
-                if(!countdown.date.year) { date.setFullYear(date.getFullYear() - 1) }
-              }
+                if(eventIsToday(countdown, new Date(), date)) {
+                  if(!countdown.date.year) { date.setFullYear(date.getFullYear() - 1) }
+                }
 
-              return (<div key={index} onClick={() => {setCurrent(index); setPopupVisible(false);}} className={styles.page} style={{backgroundImage: `url("/img/${item.backgroundImage}")`}}>
-                <span style={{color: !item.useDark ? "white" : undefined}}>{item.name.replace(/{year}/g, date.getFullYear().toString())}</span>
-              </div>)
-            }
-          )}
-        </div>
+                return (<div key={index} onClick={() => {setCurrent(index); setPopupVisible(false);}} className={styles.page} style={{backgroundImage: `url("/img/${item.backgroundImage}")`}}>
+                  <span style={{color: !item.useDark ? "white" : undefined}}>{item.name.replace(/{year}/g, date.getFullYear().toString())}</span>
+                </div>)
+              })}
+          </div> : <div className={styles.changelog}>
+            <section>
+              <div className={styles.changelogHeader}>4.1.0</div>
+              <ul>
+                <li>Re-implement embed pages</li>
+                <li>Added changelog</li>
+              </ul>
+            </section>
+            <section>
+              <div className={styles.changelogHeader}>4.0.0</div>
+              <ul>
+                <li>Re-release of countdowns.znepb.me, now open-source and wrriten in NextJS.</li>
+              </ul>
+            </section>
+          </div>}
+        
         <div className={styles.popupFooter}>
+          <div className={styles.github}>
+            {changelogVisible ? <span style={{cursor: "pointer"}} onClick={() => {setChangelogVisible(false)}}>Go back</span> : <a href={`/embed/${current}`}>Embed Version</a>}
+          </div>
           <div className={styles.footerPowered}>
-            <span>v4.0.0</span>
+            <span onClick={() => { setChangelogVisible(true) }} style={{cursor: "pointer"}}>v4.1.0</span>
             <span>Powered by NextJS</span>
           </div>
           <div className={styles.github}>

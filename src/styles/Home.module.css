@@ -131,6 +131,7 @@
   gap: 0.5rem;
   max-height: 540px;
   overflow-y: auto;
+  width: 305.9px;
 }
 
 .popupHeader {
@@ -179,4 +180,12 @@
 
 .github {
   text-align: center;
+}
+
+.changelogHeader {
+  font-weight: bold;
+}
+
+.changelog {
+  color: white;
 }
