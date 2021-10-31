@@ -44,7 +44,7 @@
     }
   },
   {
-    "name": "Summer",
+    "name": "Summer {year}",
     "backgroundImage": "summer.jpg",
     "imageAttribution": "Image: Thrive Global, The Beauty of the Summer Months",
     "useDark": true,
