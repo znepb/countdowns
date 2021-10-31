@@ -115,7 +115,7 @@ const Home = (props: CountdownsProps) => {
             <section className={styles.counter}><Counter countdown={countdown} time={time} use24hour={use24hr}></Counter></section>
             <section className={`${styles.attr} ${usingDark ? undefined : styles.white}`}>
               <section className={styles.attributeText}>{attribute}</section>
-              <img src={usingDark ? "/znepb/dark.svg" : "/znepb/light.svg"} />
+              <a href="https://znepb.me"><img src={usingDark ? "/znepb/dark.svg" : "/znepb/light.svg"} /></a>
             </section>
           </section>
           <section className={styles.next}><img onClick={() => { setCurrent(Number(current) + 1) }} style={{ display: current == countdowns.length - 1 ? "none" : "block" }} className={`${styles.icon} ${usingDark ? undefined : styles.icoInvert}`} src="/icons/chevron-right.svg" /></section>
@@ -144,6 +144,12 @@ const Home = (props: CountdownsProps) => {
               })}
           </div> : <div className={styles.changelog}>
             <section>
+              <div className={styles.changelogHeader}>4.1.1</div>
+              <ul>
+                <li>znepb.me logo now goes to znepb.me</li>
+              </ul>
+            </section>
+            <section>
               <div className={styles.changelogHeader}>4.1.0</div>
               <ul>
                 <li>Re-implement embed pages</li>
@@ -163,7 +169,7 @@ const Home = (props: CountdownsProps) => {
             {changelogVisible ? <span style={{cursor: "pointer"}} onClick={() => {setChangelogVisible(false)}}>Go back</span> : <a href={`/embed/${current}`}>Embed Version</a>}
           </div>
           <div className={styles.footerPowered}>
-            <span onClick={() => { setChangelogVisible(true) }} style={{cursor: "pointer"}}>v4.1.0</span>
+            <span onClick={() => { setChangelogVisible(true) }} style={{cursor: "pointer"}}>v4.1.1</span>
             <span>Powered by NextJS</span>
           </div>
           <div className={styles.github}>
