@@ -86,7 +86,7 @@ const Home = (props: CountdownsProps) => {
 
   return <>
     <Head>
-      <title>{text} - Countdowns</title>
+      <title>{text}{text.length == 0 ? "" : " - " }Countdowns</title>
     </Head>
     
     <Confetti confetti={confetti}></Confetti>
@@ -132,10 +132,10 @@ const Home = (props: CountdownsProps) => {
           <div className={styles.pages}>
             {countdowns.map(
               (item, index) => {
-                const date = getDateFromCountdown(countdown, new Date());
+                const date = getDateFromCountdown(item, new Date());
 
-                if(eventIsToday(countdown, new Date(), date)) {
-                  if(!countdown.date.year) { date.setFullYear(date.getFullYear() - 1) }
+                if(eventIsToday(item, new Date(), date)) {
+                  if(!item.date.year) { date.setFullYear(date.getFullYear() - 1) }
                 }
 
                 return (<div key={index} onClick={() => {setCurrent(index); setPopupVisible(false);}} className={styles.page} style={{backgroundImage: `url("/img/${item.backgroundImage}")`}}>

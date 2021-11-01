@@ -25,7 +25,7 @@ const Home = (props: CountdownsProps) => {
   const [use24hr, set24hr] = useState(false);
 
   const [text, setText] = useState("");
-  const [bgImage, setBgImage] = useState("/img/newyears.jpg");
+  const [bgImage, setBgImage] = useState("/img/" + countdowns[props.id].backgroundImage);
   const [confetti, setConfetti] = useState(new ConfettiWorker([]));
   const [intervalId, setId] = useState(-1);
 
@@ -72,7 +72,7 @@ const Home = (props: CountdownsProps) => {
 
   return <>
     <Head>
-      <title>{text} - Countdowns</title>
+      <title>{text}{text.length == 0 ? "" : " - " }Countdowns</title>
     </Head>
     
     <Confetti confetti={confetti}></Confetti>
