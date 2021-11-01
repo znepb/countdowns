@@ -166,7 +166,7 @@ const Home = (props: CountdownsProps) => {
         
         <div className={styles.popupFooter}>
           <div className={styles.github}>
-            {changelogVisible ? <span style={{cursor: "pointer"}} onClick={() => {setChangelogVisible(false)}}>Go back</span> : <a href={`/embed/${current}`}>Embed Version</a>}
+            {changelogVisible ? <span style={{cursor: "pointer"}} onClick={() => {setChangelogVisible(false)}}>Go back</span> : <a href={`/e/${current}`}>Embed Version</a>}
           </div>
           <div className={styles.footerPowered}>
             <span onClick={() => { setChangelogVisible(true) }} style={{cursor: "pointer"}}>v4.1.1</span>
