@@ -32,7 +32,6 @@ const Home = (props: CountdownsProps) => {
   const [confetti, setConfetti] = useState(new ConfettiWorker([]));
   const [intervalId, setId] = useState(-1);
 
-  const [changelogVisible, setChangelogVisible] = useState(false);
   const [popupVisible, setPopupVisible] = useState(false);
 
   const [okay, setOkay] = useState(true);
@@ -80,10 +79,6 @@ const Home = (props: CountdownsProps) => {
     }
   }, [current])
 
-  useEffect(() => {
-    setChangelogVisible(false);
-  }, [popupVisible])
-
   return <>
     <Head>
       <title>{text}{text.length == 0 ? "" : " - " }Countdowns</title>
@@ -127,8 +122,8 @@ const Home = (props: CountdownsProps) => {
     
     <div className={styles.popupContainer} style={{ display: popupVisible ? "flex" : "none" }}>
       <div className={styles.popup}>
-        <div className={styles.popupHeader}><span>{changelogVisible ? "Changelog" : "Countdowns"}</span> <span style={{cursor: "pointer", userSelect: "none"}}onClick={() => {setPopupVisible(false);}}>&times;</span></div>
-        {!changelogVisible ? 
+        <section className={styles.popupHeader}><span>Countdowns</span> <span style={{cursor: "pointer", userSelect: "none"}}onClick={() => {setPopupVisible(false);}}>&times;</span></section>
+        <section>
           <div className={styles.pages}>
             {countdowns.map(
               (item, index) => {
@@ -142,40 +137,20 @@ const Home = (props: CountdownsProps) => {
                   <span style={{color: !item.useDark ? "white" : undefined}}>{item.name.replace(/{year}/g, date.getFullYear().toString())}</span>
                 </div>)
               })}
-          </div> : <div className={styles.changelog}>
-            <section>
-              <div className={styles.changelogHeader}>4.1.1</div>
-              <ul>
-                <li>znepb.me logo now goes to znepb.me</li>
-              </ul>
-            </section>
-            <section>
-              <div className={styles.changelogHeader}>4.1.0</div>
-              <ul>
-                <li>Re-implement embed pages</li>
-                <li>Added changelog</li>
-              </ul>
-            </section>
-            <section>
-              <div className={styles.changelogHeader}>4.0.0</div>
-              <ul>
-                <li>Re-release of countdowns.znepb.me, now open-source and wrriten in NextJS.</li>
-              </ul>
-            </section>
-          </div>}
-        
-        <div className={styles.popupFooter}>
+          </div>
+        </section>
+        <section className={styles.popupFooter}>
           <div className={styles.github}>
-            {changelogVisible ? <span style={{cursor: "pointer"}} onClick={() => {setChangelogVisible(false)}}>Go back</span> : <a href={`/e/${current}`}>Embed Version</a>}
+            <a href={`/e/${current}`}>Embed Version</a>
           </div>
           <div className={styles.footerPowered}>
-            <span onClick={() => { setChangelogVisible(true) }} style={{cursor: "pointer"}}>v4.1.1</span>
+            <span style={{cursor: "pointer"}}>v4.2</span>
             <span>Powered by NextJS</span>
           </div>
           <div className={styles.github}>
             <a href="https://github.com/znepb/countdowns">Check this out on GitHub</a>
           </div>
-        </div>
+        </section>
       </div>
     </div>
   </>

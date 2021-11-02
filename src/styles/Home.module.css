@@ -103,7 +103,7 @@
   }
 }
 
-@media only screen and (min-width: 500px) {
+@media only screen and (min-width: 501px) {
   .naviSecondary {
     display: none !important;
   }
@@ -124,6 +124,7 @@
 
 .popup {
   padding: 0.8rem 1rem;
+  padding-right: 0.55rem;
   border-radius: 0.5rem;
   background-color: #111;
   display: flex;

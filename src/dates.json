@@ -88,6 +88,17 @@
     }
   },
   {
+    "name": "Thanksgiving {year}",
+    "backgroundImage": "thanksgiving.jpg",
+    "imageAttribution": "Image: WallpaperAccess, Thanksgiving Wallpapers",
+    "useDark": false,
+    "date": {
+      "month": 11,
+      "day": 25,
+      "useLocalOffset": true
+    }
+  },
+  {
     "name": "Christmas {year}",
     "backgroundImage": "christmas.jpg",
     "imageAttribution": "Image: WallpaperAccess, Christmas Wallpapers",
