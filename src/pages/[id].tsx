@@ -87,24 +87,38 @@ const Home = (props: CountdownsProps) => {
     <Confetti confetti={confetti}></Confetti>
     
     <Image 
-        className={styles.image} 
-        src={bgImage} layout="fill"
-        objectFit="cover"
-        quality={1}
-        placeholder="empty"
-        loading="eager"
-        priority={true}>
+      className={styles.image} 
+      src={bgImage} layout="fill"
+      objectFit="cover"
+      quality={1}
+      placeholder="empty"
+      loading="eager"
+      priority={true}>
     </Image>
 
     <div className={styles.main}>
       <div className={styles.container}>
         {okay ? <>
-          <section className={styles.last}><img onClick={() => { setCurrent(Number(current) - 1) }} style={{ display: current == 0 ? "none" : "block" }} className={`${styles.icon} ${usingDark ? undefined : styles.icoInvert}`} src="/icons/chevron-left.svg" /></section>
+          <section className={styles.last}><img onClick={
+            () => {
+              if(current > 0) {
+                setCurrent(Number(current) - 1) ;
+              }
+            }
+          } style={{ display: current == 0 ? "none" : "block" }} className={`${styles.icon} ${usingDark ? undefined : styles.icoInvert}`} src="/icons/chevron-left.svg" /></section>
           <section className={styles.center}>
             <section className={styles.select}>
-              <img onClick={() => { setCurrent(Number(current) - 1) }} style={{ opacity: current == 0 ? 0 : 1, pointerEvents: current == 0 ? "auto" : "none" }} className={`${styles.naviSecondary} ${styles.iconTop} ${usingDark ? undefined : styles.icoInvert}`} src="/icons/chevron-left.svg" />
+              <img onClick={() => { 
+                if(current > 0) {
+                  setCurrent(Number(current) - 1) ;
+                }
+              }} style={{ opacity: current == 0 ? 0 : 1, pointerEvents: current == 0 ? "auto" : "none" }} className={`${styles.naviSecondary} ${styles.iconTop} ${usingDark ? undefined : styles.icoInvert}`} src="/icons/chevron-left.svg" />
               <img onClick={() => { setPopupVisible(true) } }className={`${styles.iconTop} ${usingDark ? undefined : styles.icoInvert}`} src="/icons/menu.svg" />
-              <img onClick={() => { setCurrent(Number(current) + 1) }} style={{ opacity: current == countdowns.length - 1 ? 0 : 1, pointerEvents: countdowns.length - 1 ? "auto" : "none" }} className={`${styles.naviSecondary} ${styles.iconTop} ${usingDark ? undefined : styles.icoInvert}`} src="/icons/chevron-right.svg" />
+              <img onClick={() => { 
+                if(countdowns[current + 1]) {
+                  setCurrent(Number(current) + 1) ;
+                }
+              }} style={{ opacity: current == countdowns.length - 1 ? 0 : 1, pointerEvents: countdowns.length - 1 ? "auto" : "none" }} className={`${styles.naviSecondary} ${styles.iconTop} ${usingDark ? undefined : styles.icoInvert}`} src="/icons/chevron-right.svg" />
             </section>
 
             <section className={styles.counter}><Counter countdown={countdown} time={time} use24hour={use24hr}></Counter></section>
@@ -113,7 +127,13 @@ const Home = (props: CountdownsProps) => {
               <a href="https://znepb.me"><img src={usingDark ? "/znepb/dark.svg" : "/znepb/light.svg"} /></a>
             </section>
           </section>
-          <section className={styles.next}><img onClick={() => { setCurrent(Number(current) + 1) }} style={{ display: current == countdowns.length - 1 ? "none" : "block" }} className={`${styles.icon} ${usingDark ? undefined : styles.icoInvert}`} src="/icons/chevron-right.svg" /></section>
+          <section className={styles.next}><img onClick={
+            () => { 
+              if(countdowns[current + 1]) {
+                setCurrent(Number(current) + 1) ;
+              }
+            }
+          } style={{ display: current == countdowns.length - 1 ? "none" : "block" }} className={`${styles.icon} ${usingDark ? undefined : styles.icoInvert}`} src="/icons/chevron-right.svg" /></section>
         </> : <>
           Well, something happened that wasn&apos;t supposed to...
         </>}
@@ -144,7 +164,7 @@ const Home = (props: CountdownsProps) => {
             <a href={`/e/${current}`}>Embed Version</a>
           </div>
           <div className={styles.footerPowered}>
-            <span style={{cursor: "pointer"}}>v4.2</span>
+            <span style={{cursor: "pointer"}}>v4.3</span>
             <span>Powered by NextJS</span>
           </div>
           <div className={styles.github}>

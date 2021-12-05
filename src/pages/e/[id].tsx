@@ -84,7 +84,8 @@ const Home = (props: CountdownsProps) => {
         quality={1}
         placeholder="empty"
         loading="eager"
-        priority={true}>
+        priority={true}
+        >
     </Image>
 
     <div className={styles.main}>
