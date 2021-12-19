@@ -1,3 +1,5 @@
+/* Containers and Images */
+
 .image {
   background-position: center center;
   background-size: cover;
@@ -14,59 +16,13 @@
   backdrop-filter: blur(8px);
 }
 
-.container { 
-  display: flex; 
+.container {
+  display: flex;
   height: 98vh;
   width: 98%;
   flex-direction: row;
   justify-content: space-between;
   z-index: 2;
-}
-
-.select { 
-  display: flex; 
-  align-items: center;
-  justify-content: center;
-  flex-direction: row;
-  height: 3rem;
-  width: 100%;
-}
-
-.attr { 
-  height: 5rem;
-  width: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-direction: column;
-  gap: 0.75rem;
-}
-
-.center {
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  user-select: none;
-}
-
-.next { 
-  display: flex; 
-  justify-content: center;
-  width: 3rem;
-  user-select: none;
-}
-
-.last {
-  display: flex; 
-  justify-content: center;
-  width: 3rem;
-  user-select: none;
-}
-
-.counter { 
-  display: flex;
-  width: 100%;
-  justify-content: center;
 }
 
 .icon {
@@ -85,19 +41,90 @@
   filter: invert(1);
 }
 
+/* Navigation */
+
+.select {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: row;
+  height: 3rem;
+  width: 100%;
+}
+
+.next {
+  display: flex;
+  justify-content: center;
+  width: 3rem;
+  user-select: none;
+}
+
+.last {
+  display: flex;
+  justify-content: center;
+  width: 3rem;
+  user-select: none;
+}
+
+/* Footer */
+
+.attr {
+  height: 5rem;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.center {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  user-select: none;
+}
+
 .attributeText {
   font-size: 0.8rem;
 }
 
-.white { color: #fff }
+.white {
+  color: #fff;
+}
+
+/* Counter */
+
+.counter {
+  display: flex;
+  width: 100%;
+  justify-content: center;
+}
+
+/* Sizing doo-dads */
 
 @media only screen and (max-width: 500px) {
-  .next, .last {
+  .next,
+  .last {
     display: none !important;
+  }
+
+  .select {
+    gap: 1rem;
+  }
+
+  .iconTop:active {
+    background-color: rgb(68, 180, 255);
   }
 
   .naviSecondary {
     display: block !important;
+  }
+
+  .iconTop {
+    background-color: white;
+    padding: 0.5rem;
+    border-radius: 1rem;
   }
 
   .center {
@@ -110,6 +137,8 @@
     display: none !important;
   }
 }
+
+/* Popup */
 
 .popupContainer {
   display: flex;
@@ -184,12 +213,4 @@
 
 .github {
   text-align: center;
-}
-
-.changelogHeader {
-  font-weight: bold;
-}
-
-.changelog {
-  color: white;
 }
