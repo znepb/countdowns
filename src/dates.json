@@ -22,27 +22,10 @@
     }
   },
   {
-    "name": "Kings Island Passholder Preview Day",
+    "name": "Kings Island Opening Day",
     "backgroundImage": "kingsisland.jpg",
     "imageAttribution": "Image: ©️ Marcus Wenzel 2021",
     "useDark": true,
-    "date": {
-      "month": 4,
-      "day": 9,
-      "year": 2022,
-      "time": {
-        "hour": 10,
-        "minute": 0,
-        "second": 0
-      },
-      "useLocalOffset": true
-    }
-  },
-  {
-    "name": "Kings Island Opening Day",
-    "backgroundImage": "kingsislandpreview.jpg",
-    "imageAttribution": "Image: ©️ Marcus Wenzel 2021",
-    "useDark": false,
     "date": {
       "month": 4,
       "day": 16,

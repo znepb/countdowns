@@ -158,7 +158,7 @@
   padding: 0.8rem 1rem;
   padding-right: 0.55rem;
   border-radius: 0.5rem;
-  background-color: #111;
+  background-color: #000d17;
   display: flex;
   flex-direction: column;
   gap: 0.5rem;
@@ -168,7 +168,7 @@
 }
 
 .popupHeader {
-  color: white;
+  color: #f24646;
   font-weight: bold;
   font-size: 1.4rem;
   display: flex;
@@ -213,4 +213,25 @@
 
 .github {
   text-align: center;
+}
+
+.znepbme {
+  display: flex;
+  gap: 0.2rem;
+  justify-content: center;
+
+  & > .selected {
+    color: #f24646 !important;
+    font-weight: bold;
+  }
+
+  & > span {
+    color: rgba(255, 255, 255, 0.5);
+  }
+}
+
+.logo {
+  margin-top: 0.5rem;
+  display: flex;
+  justify-content: center;
 }

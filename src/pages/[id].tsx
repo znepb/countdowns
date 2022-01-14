@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import fs from "fs";
 import path from "path";
 import Head from "next/head";
-import styles from "../styles/Home.module.css";
+import styles from "../styles/Home.module.scss";
 import Counter from "../components/Counter";
 import Confetti from "../components/Confetti";
 import ConfettiWorker from "../ConfettiWorker";
@@ -21,7 +21,7 @@ const Home = (props: CountdownsProps) => {
   const countdowns = props.countdowns;
   const router = useRouter();
 
-  const [current, setCurrent] = useState(props.id);
+  const [current, setCurrent] = useState(Number(props.id));
   const [time, setTime] = useState(Date.now());
   const [use24hr, set24hr] = useState(false);
 
@@ -34,7 +34,6 @@ const Home = (props: CountdownsProps) => {
   const [confetti, setConfetti] = useState(new ConfettiWorker([]));
 
   const [tick, setTick] = useState(0);
-  const [tickFunction, setTickFunction] = useState<any>();
 
   const [popupVisible, setPopupVisible] = useState(false);
 
@@ -78,6 +77,8 @@ const Home = (props: CountdownsProps) => {
     } else {
       setOkay(false);
     }
+
+    console.log(current);
   }, [current]);
 
   return (
@@ -194,6 +195,7 @@ const Home = (props: CountdownsProps) => {
                   <a href="https://znepb.me">
                     <img
                       src={usingDark ? "/znepb/dark.svg" : "/znepb/light.svg"}
+                      height="37px"
                     />
                   </a>
                 </section>
@@ -278,15 +280,33 @@ const Home = (props: CountdownsProps) => {
           </section>
           <section className={styles.popupFooter}>
             <div className={styles.github}>
-              <a href={`/e/${current}`}>Embed Version</a>
-            </div>
-            <div className={styles.footerPowered}>
-              <span style={{ cursor: "pointer" }}>v4.4</span>
-              <span>Powered by NextJS</span>
+              <a className="blue" href={`/e/${current}`}>
+                Embed Version
+              </a>
             </div>
             <div className={styles.github}>
-              <a href="https://github.com/znepb/countdowns">
+              <span>Copyright © znepb 2022</span>
+            </div>
+            <div className={styles.znepbme}>
+              <a href="https://znepb.me/">Home</a>
+              <span>•</span>
+              <a href="https://lens.znepb.me/">Lens</a>
+              <span>•</span>
+              <a href="https://analytics.znepb.me/">Analytics</a>
+              <span>•</span>
+              <span className={styles.selected}>Countdowns</span>
+              <span>•</span>
+              <a href="https://files.znepb.me/">Files</a>
+            </div>
+            <div className={styles.github}>
+              <a className="blue" href="https://github.com/znepb/countdowns">
                 Check this out on GitHub
+              </a>
+              <span> • v4.5</span>
+            </div>
+            <div className={styles.logo}>
+              <a href="https://znepb.me">
+                <img src="/znepb/light.svg" height="28px" />
               </a>
             </div>
           </section>
