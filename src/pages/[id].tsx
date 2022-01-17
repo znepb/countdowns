@@ -9,6 +9,8 @@ import ConfettiWorker from "../ConfettiWorker";
 import { useRouter } from "next/router";
 import Image from "next/image";
 
+import countdowns from "../../public/countdowns.json";
+
 import { Countdown } from "../types";
 import { getDateFromCountdown, eventIsToday } from "../timeutils";
 
@@ -25,7 +27,6 @@ const Home = (props: CountdownsProps) => {
   const [time, setTime] = useState(Date.now());
   const [use24hr, set24hr] = useState(false);
 
-  const [text, setText] = useState("");
   const [bgImage, setBgImage] = useState(
     `/img/${countdowns[current].backgroundImage}`
   );
@@ -33,64 +34,59 @@ const Home = (props: CountdownsProps) => {
   const [attribute, setAttribute] = useState("");
   const [confetti, setConfetti] = useState(new ConfettiWorker([]));
 
-  const [tick, setTick] = useState(0);
-
   const [popupVisible, setPopupVisible] = useState(false);
 
-  const [okay, setOkay] = useState(true);
+  const [okay, setOkay] = useState<boolean>(true);
+  const [countdown, setCountdown] = useState<Countdown>(countdowns[current]);
 
-  let countdown = countdowns[current];
-
-  useEffect(() => {
-    const now = Date.now();
-    setTime(now);
-
-    const date = getDateFromCountdown(countdown, new Date());
-
-    if (eventIsToday(countdown, new Date(), date)) {
-      confetti.startAnimation();
-      if (!countdown.date.year) {
-        date.setFullYear(date.getFullYear() - 1);
-      }
-    } else {
-      confetti.pauseAnimation();
-    }
-
-    setText(countdown.name.replace(/{year}/g, date.getFullYear().toString()));
-
-    setTimeout(() => {
-      setTick(tick + 1);
-    }, 1000);
-  }, [tick]);
+  const [preloadImages, setPreloadImages] = useState(countdowns);
 
   useEffect(() => {
-    countdown = countdowns[current];
+    setCountdown(countdowns[current]);
 
     router.push("/" + current, undefined, { shallow: true });
+  }, [current]);
 
+  useEffect(() => {
     if (countdown) {
       setOkay(true);
 
-      setBgImage("/img/" + countdown.backgroundImage);
-      setDark(countdown.useDark);
-      setAttribute(countdown.imageAttribution);
+      setBgImage("/img/" + countdowns[current].backgroundImage);
+      setDark(countdowns[current].useDark);
+      setAttribute(countdowns[current].imageAttribution);
     } else {
       setOkay(false);
     }
+  }, [countdown]);
 
-    console.log(current);
-  }, [current]);
+  useEffect(() => {
+    console.log(countdowns);
+    setPreloadImages(countdowns);
+  }, [countdowns]);
 
   return (
     <>
       <Head>
-        <title>
-          {text}
-          {text.length == 0 ? "" : " - "}Countdowns
-        </title>
+        <title>{countdown ? `${countdown.name} - ` : ""}Countdowns</title>
       </Head>
 
       <Confetti confetti={confetti}></Confetti>
+
+      {/* hacky way to preload images */}
+      <div className={styles.imagePreload}>
+        {preloadImages.map((countdown) => (
+          <Image
+            className={styles.image}
+            src={"/img/" + countdown.backgroundImage}
+            layout="fill"
+            objectFit="cover"
+            quality={1}
+            placeholder="empty"
+            loading="eager"
+            priority={true}
+          />
+        ))}
+      </div>
 
       <Image
         className={styles.image}
@@ -103,6 +99,7 @@ const Home = (props: CountdownsProps) => {
         priority={true}
       ></Image>
 
+      {/* Navigation */}
       <div className={styles.main}>
         <div className={styles.container}>
           {okay ? (
@@ -178,9 +175,9 @@ const Home = (props: CountdownsProps) => {
                 <section className={styles.counter}>
                   <Counter
                     countdown={countdown}
-                    time={time}
                     use24hour={use24hr}
-                  ></Counter>
+                    confetti={confetti}
+                  />
                 </section>
 
                 {/* Footer */}
@@ -226,6 +223,7 @@ const Home = (props: CountdownsProps) => {
         </div>
       </div>
 
+      {/* Popup */}
       <div
         className={styles.popupContainer}
         style={{ display: popupVisible ? "flex" : "none" }}
@@ -244,6 +242,17 @@ const Home = (props: CountdownsProps) => {
           </section>
           <section>
             <div className={styles.pages}>
+              {/*<div
+                onClick={() => {
+                  setPopupVisible(false);
+                }}
+                className={styles.page}
+                style={{
+                  background: "#111",
+                }}
+              >
+                <span style={{ color: "white" }}>Custom</span>
+              </div>*/}
               {countdowns.map((item, index) => {
                 const date = getDateFromCountdown(item, new Date());
 
@@ -262,7 +271,8 @@ const Home = (props: CountdownsProps) => {
                     }}
                     className={styles.page}
                     style={{
-                      backgroundImage: `url("/img/${item.backgroundImage}")`,
+                      backgroundImage: `url("/_next/image?url=%2Fimg%2F${item.backgroundImage}&w=640&q=75")`,
+                      backgroundPositionY: -item.popoutOffset,
                     }}
                   >
                     <span
@@ -302,7 +312,7 @@ const Home = (props: CountdownsProps) => {
               <a className="blue" href="https://github.com/znepb/countdowns">
                 Check this out on GitHub
               </a>
-              <span> • v4.5</span>
+              <span> • v4.6</span>
             </div>
             <div className={styles.logo}>
               <a href="https://znepb.me">
@@ -317,10 +327,6 @@ const Home = (props: CountdownsProps) => {
 };
 
 export async function getStaticPaths() {
-  const countdowns = JSON.parse(
-    fs.readFileSync(path.resolve("./", "src", "dates.json")).toString("utf-8")
-  );
-
   const paths = countdowns.map((countdown: Countdown, index: number) => ({
     params: { id: index.toString() },
   }));
@@ -332,10 +338,6 @@ export async function getStaticPaths() {
 }
 
 export const getStaticProps = async (context: any) => {
-  const countdowns = JSON.parse(
-    fs.readFileSync(path.resolve("./", "src", "dates.json")).toString("utf-8")
-  );
-
   return {
     props: {
       countdowns: countdowns,

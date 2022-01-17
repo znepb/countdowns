@@ -3,6 +3,7 @@ interface Countdown {
   backgroundImage: string;
   imageAttribution: string;
   useDark: boolean;
+  popoutOffset: number;
   date: {
     month: number;
     day: number;
@@ -12,8 +13,8 @@ interface Countdown {
       hour: number;
       minute: number;
       second: number;
-    }
-  }
+    };
+  };
 }
 
 export type { Countdown };

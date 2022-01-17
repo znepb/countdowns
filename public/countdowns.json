@@ -4,6 +4,7 @@
     "backgroundImage": "newyears.jpg",
     "imageAttribution": "Image: WallpaperAccess Free New Year's Eve Backgrounds",
     "useDark": false,
+    "popoutOffset": 40,
     "date": {
       "month": 1,
       "day": 1,
@@ -15,6 +16,7 @@
     "backgroundImage": "birthday.jpg",
     "imageAttribution": "Image: WallpaperSafari Happy birthday cake wallpaper",
     "useDark": true,
+    "popoutOffset": 30,
     "date": {
       "month": 3,
       "day": 6,
@@ -26,6 +28,7 @@
     "backgroundImage": "kingsisland.jpg",
     "imageAttribution": "Image: ©️ Marcus Wenzel 2021",
     "useDark": true,
+    "popoutOffset": 0,
     "date": {
       "month": 4,
       "day": 16,
@@ -40,9 +43,10 @@
   },
   {
     "name": "Cedar Point Opening Day",
-    "backgroundImage": "cp.jpg",
+    "backgroundImage": "cedarpoint.jpg",
     "imageAttribution": "Image: Gregory Varnum, CC BY-SA 4.0, via Wikimedia Commons",
     "useDark": false,
+    "popoutOffset": 10,
     "date": {
       "month": 5,
       "day": 7,
@@ -60,6 +64,7 @@
     "backgroundImage": "winter.jpg",
     "imageAttribution": "Image: Wallpaper Cave, Winter Wallpapers",
     "useDark": true,
+    "popoutOffset": 40,
     "date": {
       "month": 12,
       "day": 21,
@@ -71,6 +76,7 @@
     "backgroundImage": "spring.jpg",
     "imageAttribution": "Image: WallpaperAccess, Top Free Spring Backgrounds",
     "useDark": true,
+    "popoutOffset": 40,
     "date": {
       "month": 3,
       "day": 20,
@@ -82,6 +88,7 @@
     "backgroundImage": "summer.jpg",
     "imageAttribution": "Image: Thrive Global, The Beauty of the Summer Months",
     "useDark": true,
+    "popoutOffset": 90,
     "date": {
       "month": 6,
       "day": 20,
@@ -93,9 +100,22 @@
     "backgroundImage": "fall.jpg",
     "imageAttribution": "Image: Wallpaper Cave, Autumn Wallpapers",
     "useDark": false,
+    "popoutOffset": 0,
     "date": {
       "month": 9,
       "day": 22,
+      "useLocalOffset": true
+    }
+  },
+  {
+    "name": "Easter {year}",
+    "backgroundImage": "easter.jpg",
+    "imageAttribution": "Image: WallpaperAccess, Christmas Wallpapers",
+    "useDark": true,
+    "popoutOffset": 50,
+    "date": {
+      "month": 4,
+      "day": 17,
       "useLocalOffset": true
     }
   },
@@ -104,6 +124,7 @@
     "backgroundImage": "july4.jpg",
     "imageAttribution": "Image: WallpaperAccess, Christmas Wallpapers",
     "useDark": false,
+    "popoutOffset": 0,
     "date": {
       "month": 7,
       "day": 4,
@@ -115,6 +136,7 @@
     "backgroundImage": "halloween.jpg",
     "imageAttribution": "Image: Wallpaper Cave, Halloween Pumpkin Wallpapers",
     "useDark": false,
+    "popoutOffset": 70,
     "date": {
       "month": 10,
       "day": 31,
@@ -126,9 +148,10 @@
     "backgroundImage": "thanksgiving.jpg",
     "imageAttribution": "Image: WallpaperAccess, Thanksgiving Wallpapers",
     "useDark": false,
+    "popoutOffset": 80,
     "date": {
       "month": 11,
-      "day": 25,
+      "day": 24,
       "useLocalOffset": true
     }
   },
@@ -137,6 +160,7 @@
     "backgroundImage": "christmas.jpg",
     "imageAttribution": "Image: WallpaperAccess, Christmas Wallpapers",
     "useDark": false,
+    "popoutOffset": 60,
     "date": {
       "month": 12,
       "day": 25,
