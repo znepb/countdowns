@@ -74,8 +74,9 @@ const Home = (props: CountdownsProps) => {
 
       {/* hacky way to preload images */}
       <div className={styles.imagePreload}>
-        {preloadImages.map((countdown) => (
+        {preloadImages.map((countdown, idx) => (
           <Image
+            key={idx}
             className={styles.image}
             src={"/img/" + countdown.backgroundImage}
             layout="fill"
