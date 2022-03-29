@@ -38,6 +38,7 @@ const Home = (props: CountdownsProps) => {
 
   const [okay, setOkay] = useState<boolean>(true);
   const [countdown, setCountdown] = useState<Countdown>(countdowns[current]);
+  const [currentDateFromCountdown, setDateFromCountdown] = useState<Date>();
 
   const [preloadImages, setPreloadImages] = useState(countdowns);
 
@@ -54,6 +55,9 @@ const Home = (props: CountdownsProps) => {
       setBgImage("/img/" + countdowns[current].backgroundImage);
       setDark(countdowns[current].useDark);
       setAttribute(countdowns[current].imageAttribution);
+      setDateFromCountdown(
+        getDateFromCountdown(countdown, new Date(Date.now()))
+      );
     } else {
       setOkay(false);
     }
@@ -67,7 +71,17 @@ const Home = (props: CountdownsProps) => {
   return (
     <>
       <Head>
-        <title>{countdown ? `${countdown.name} - ` : ""}Countdowns</title>
+        <title>
+          {countdown
+            ? `${countdown.name.replace(
+                "{year}",
+                currentDateFromCountdown?.getFullYear() === undefined
+                  ? ""
+                  : String(currentDateFromCountdown?.getFullYear())
+              )} - `
+            : ""}
+          Countdowns
+        </title>
       </Head>
 
       <Confetti confetti={confetti}></Confetti>
@@ -313,7 +327,7 @@ const Home = (props: CountdownsProps) => {
               <a className="blue" href="https://github.com/znepb/countdowns">
                 Check this out on GitHub
               </a>
-              <span> • v4.6</span>
+              <span> • v4.6.1</span>
             </div>
             <div className={styles.logo}>
               <a href="https://znepb.me">
