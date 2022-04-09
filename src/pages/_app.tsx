@@ -38,7 +38,7 @@ function MyApp({ Component, pageProps }: AppProps) {
 
                 <div className={styles.countdownsList}>
                   {countdowns.map((countdown: Countdown, id) => (
-                    <Link href={`/${id}`}>
+                    <Link href={`/${id}`} key={id}>
                       <div
                         className={styles.countdown}
                         key={countdown.name}
@@ -65,7 +65,7 @@ function MyApp({ Component, pageProps }: AppProps) {
                   {typeof window != "undefined" &&
                     getCustomCountdowns().map(
                       (countdown: Countdown, id: number) => (
-                        <Link href={`/c-${id}`}>
+                        <Link href={`/c-${id}`} key={id}>
                           <div
                             className={styles.countdown}
                             key={countdown.name}
@@ -190,14 +190,12 @@ function MyApp({ Component, pageProps }: AppProps) {
                 </h2>
 
                 <div className={styles.countdownsList}>
-                  {changelog.map((o) => (
-                    <section>
+                  {changelog.map((o, id) => (
+                    <section key={id}>
                       <div className={styles.changelogTitle}>
                         <b>{o.version.join(".")}</b>
                         {" · "}
-                        <span>
-                          {o.date} {o.rc && `Release Canidate ${o.rc}`}
-                        </span>
+                        <span>{o.date}</span>
                         {" · "}
                         <i>
                           <TimeAgo

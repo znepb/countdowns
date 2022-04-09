@@ -5,7 +5,7 @@ export default function CountdownsDocument() {
     <Html lang="en">
       <Head>
         <link rel="manifest" href="/manifest.json" />
-        <link ref="apple-touch-icon" href="/icon-512x512.png" />
+        <link rel="apple-touch-icon" href="/icon-512x512.png" />
         <meta name="theme-color" content="#F24646" />
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" />

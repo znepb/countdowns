@@ -107,15 +107,15 @@ export default function Countdowns({ setMenuVisible }: any) {
               <div>
                 Click on the date and time underneath the title, and you will be
                 given a prompt to choose a date, and optionally, a time. If you
-                don't type in a year, the event will occur annually, but if you
-                do type in a year it will only occur once, and after the date
-                has passed, the countdown will stay on zero until the countdown
-                is removed.
+                don&apos;t type in a year, the event will occur annually, but if
+                you do type in a year it will only occur once, and after the
+                date has passed, the countdown will stay on zero until the
+                countdown is removed.
               </div>
               <br />
               <div>
-                <b>Notice:</b> Once you make your countdown, you won't be able
-                to change it, so make it good!
+                <b>Notice:</b> Once you make your countdown, you won&apos;t be
+                able to change it, so make it good!
               </div>
               <br />
               <div>

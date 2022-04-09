@@ -124,7 +124,7 @@ export default function Countdowns({ setMenuVisible }: any) {
   } else {
     return (
       <>
-        Looks like this countdown doesn't exist.{" "}
+        Looks like this countdown doesn&apos;t exist.{" "}
         <button
           onClick={() => {
             setCurrentInIndex(0);
