@@ -1,13 +1,11 @@
 import styles from "../styles/Create.module.scss";
 import Countdown from "../components/countdown";
-import countdowns from "../../public/countdowns.json";
 import menustyles from "../styles/Menu.module.scss";
-import { useContext, useEffect, useState } from "react";
+import { useState } from "react";
 import { useRouter } from "next/router";
 import { Check, HelpCircle, ImagePlus, Moon, X } from "lucide-react";
 import { Countdown as CountdownType } from "../types";
 import Link from "next/link";
-import { parse } from "path";
 
 export enum Menu {
   NONE,
@@ -426,7 +424,7 @@ export default function Countdowns({ setMenuVisible }: any) {
         <div>
           <Countdown
             countdown={{
-              name,
+              name: name || "",
               useDark,
               popoutOffset: 0,
               date,
