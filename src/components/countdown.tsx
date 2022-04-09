@@ -80,7 +80,7 @@ export default function Countdown({ countdown, setMenu }: CountdownProps) {
       <Head>
         <title>
           {typeof countdown.name === "string"
-            ? `${countdown.name.replaceAll(
+            ? `${countdown.name.replace(
                 "{year}",
                 (countdownDate.getFullYear() - (isToday ? 1 : 0)).toString()
               )} - Countdowns"`
@@ -102,10 +102,12 @@ export default function Countdown({ countdown, setMenu }: CountdownProps) {
               }
             }}
           >
-            {countdown.name.replaceAll(
-              "{year}",
-              (countdownDate.getFullYear() - (isToday ? 1 : 0)).toString()
-            )}
+            {typeof countdown.name === "string"
+              ? `${countdown.name.replace(
+                  "{year}",
+                  (countdownDate.getFullYear() - (isToday ? 1 : 0)).toString()
+                )}"`
+              : ""}
           </h2>
           <h3
             onClick={() => {
