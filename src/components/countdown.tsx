@@ -79,11 +79,12 @@ export default function Countdown({ countdown, setMenu }: CountdownProps) {
     <div className={styles.countdownWrapper}>
       <Head>
         <title>
-          {countdown.name.replaceAll(
-            "{year}",
-            (countdownDate.getFullYear() - (isToday ? 1 : 0)).toString()
-          )}{" "}
-          - Countdowns
+          {typeof countdown.name === "string"
+            ? `${countdown.name.replaceAll(
+                "{year}",
+                (countdownDate.getFullYear() - (isToday ? 1 : 0)).toString()
+              )} - Countdowns"`
+            : "Countdowns"}
         </title>
       </Head>
 
