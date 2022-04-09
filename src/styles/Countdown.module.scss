@@ -1,0 +1,89 @@
+.countdownWrapper {
+  display: flex;
+  justify-content: center;
+}
+
+.dark {
+  color: black !important;
+}
+
+.countdown {
+  color: white;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  display: flex;
+  align-items: center;
+  text-align: center;
+
+  & > header {
+    flex-direction: column;
+    display: flex;
+    align-items: center;
+    gap: 0.2rem;
+
+    & > h2 {
+      padding: 0;
+      margin: 0;
+      font-size: 2.6rem;
+
+      @media only screen and (max-width: 370px) {
+        font-size: 2rem;
+      }
+    }
+
+    & > h3 {
+      padding: 0;
+      margin: 0;
+      font-weight: normal;
+      font-size: 1.4rem;
+
+      @media only screen and (max-width: 370px) {
+        font-size: 1rem;
+      }
+    }
+  }
+}
+
+.countdownTickers {
+  display: flex;
+  gap: 0.5rem;
+  align-items: center;
+
+  @media only screen and (max-width: 450px) {
+    gap: 0.2rem;
+    color: inherit !important;
+    background: none;
+  }
+
+  & > main {
+    background-color: rgba(0, 0, 0, 0.2);
+    color: white !important;
+    font-size: 4rem;
+    padding: 0 1rem;
+    border-radius: 1rem;
+    font-weight: bold;
+
+    @media only screen and (max-width: 620px) {
+      padding: 0;
+      color: inherit !important;
+      background: none;
+    }
+
+    @media only screen and (max-width: 370px) {
+      font-size: 2.6rem;
+    }
+  }
+
+  & > div {
+    font-size: 3.5rem;
+    font-weight: bold;
+    &::after {
+      content: ":";
+    }
+
+    @media only screen and (max-width: 370px) {
+      font-size: 2.2rem;
+    }
+  }
+}

@@ -1,0 +1,84 @@
+[
+  {
+    "version": [5, 0],
+    "date": "April 8 2022",
+    "time": "23:00",
+    "notes": [
+      "App re-written",
+      "App now functions as a PWA",
+      "Re-added custom countdowns. Currently can't be shared, but that's coming Soon:tm:",
+      "Better mobile compatibility (again)",
+      "Navigation buttons are now always on top",
+      "Changelog returns"
+    ]
+  },
+  {
+    "version": [4, 6, 2],
+    "date": "March 28 2022",
+    "notes": ["Fix title year", "Packages updated"]
+  },
+  {
+    "version": [4, 6, 1],
+    "date": "January 31 2022",
+    "notes": ["Added docs", "Easter image attribution"]
+  },
+  {
+    "version": [4, 6],
+    "date": "January 16 2022",
+    "notes": ["Add easter countdown", "Image preloading"]
+  },
+  {
+    "version": [4, 5],
+    "date": "January 13 2022",
+    "notes": ["Changed background color", "znepb.me uniformity", "Code cleanup"]
+  },
+  {
+    "version": [4, 4],
+    "date": "December 19 2021",
+    "notes": [
+      "Added a background around navigation and menu button on smaller screens to make them easier to click on mobile",
+      "Change from using setInterval to a custom tick function",
+      "Added Kings Island Passholder Preview, Kings Island Opening Day, and Cedar Point Opening Day countdowns"
+    ]
+  },
+  {
+    "version": [4, 3, 1],
+    "date": "December 4 2021",
+    "notes": ["Mobile compatibility fixes"]
+  },
+  {
+    "version": [4, 3],
+    "date": "November 2 2021",
+    "notes": ["Removed changelog", "Added Thanksgiving countdown", "Better UX"]
+  },
+  {
+    "version": [4, 2, 1],
+    "date": "November 1 2021",
+    "notes": ["Fix embed link"]
+  },
+  {
+    "version": [4, 2],
+    "date": "November 1 2021",
+    "notes": ["Bug fixes", "Changed /embed/[id] to /e/[id]"]
+  },
+  {
+    "version": [4, 1, 2],
+    "date": "October 31 2021",
+    "notes": ["Attempt to fix reloading every 5 seconds"]
+  },
+  {
+    "version": [4, 1, 1],
+    "date": "October 30 2021",
+    "notes": ["znepb.me logo will now bring you to znepb.me"]
+  },
+  {
+    "version": [4, 1],
+    "date": "October 30 2021",
+    "notes": ["Embed page return", "Added changelog"]
+  },
+  {
+    "version": [4, 0],
+    "date": "October 30 2021",
+    "notes": ["Countdowns now uses NextJS", "Better mobile compatibility"]
+  }
+]

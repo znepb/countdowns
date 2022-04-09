@@ -1,7 +1,7 @@
 interface Countdown {
   name: string;
-  backgroundImage: string;
-  imageAttribution: string;
+  backgroundImage?: string;
+  imageAttribution?: string;
   useDark: boolean;
   popoutOffset: number;
   date: {
@@ -13,8 +13,16 @@ interface Countdown {
       hour: number;
       minute: number;
       second: number;
+      timezone: string;
     };
   };
 }
 
-export type { Countdown };
+interface DateTimeDict {
+  d: number;
+  h: number;
+  m: number;
+  s: number;
+}
+
+export type { Countdown, DateTimeDict };
