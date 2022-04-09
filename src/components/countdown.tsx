@@ -83,7 +83,7 @@ export default function Countdown({ countdown, setMenu }: CountdownProps) {
             ? `${countdown.name.replace(
                 "{year}",
                 (countdownDate.getFullYear() - (isToday ? 1 : 0)).toString()
-              )} - Countdowns"`
+              )} - Countdowns`
             : "Countdowns"}
         </title>
       </Head>
@@ -106,7 +106,7 @@ export default function Countdown({ countdown, setMenu }: CountdownProps) {
               ? `${countdown.name.replace(
                   "{year}",
                   (countdownDate.getFullYear() - (isToday ? 1 : 0)).toString()
-                )}"`
+                )}`
               : ""}
           </h2>
           <h3
