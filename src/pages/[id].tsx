@@ -1,364 +1,138 @@
-import React, { useState, useEffect } from "react";
-import fs from "fs";
-import path from "path";
+import type { NextPage } from "next";
 import Head from "next/head";
-import styles from "../styles/Home.module.scss";
-import Counter from "../components/Counter";
-import Confetti from "../components/Confetti";
-import ConfettiWorker from "../ConfettiWorker";
-import { useRouter } from "next/router";
 import Image from "next/image";
-
+import styles from "../styles/Home.module.scss";
+import Countdown from "../components/countdown";
 import countdowns from "../../public/countdowns.json";
+import { useContext, useEffect, useState } from "react";
+import { useRouter } from "next/router";
+import { ChevronLeft, ChevronRight, Menu } from "lucide-react";
+import { Countdown as CountdownType } from "../types";
+import { getCustomCountdowns } from "../LocalData";
 
-import { Countdown } from "../types";
-import { getDateFromCountdown, eventIsToday } from "../timeutils";
-
-interface CountdownsProps {
-  countdowns: Countdown[];
-  id: number;
-}
-
-const Home = (props: CountdownsProps) => {
-  const countdowns = props.countdowns;
+export default function Countdowns({ setMenuVisible }: any) {
   const router = useRouter();
-
-  const [current, setCurrent] = useState(Number(props.id));
-  const [time, setTime] = useState(Date.now());
-  const [use24hr, set24hr] = useState(false);
-
-  const [bgImage, setBgImage] = useState(
-    `/img/${countdowns[current].backgroundImage}`
-  );
-  const [usingDark, setDark] = useState(false);
-  const [attribute, setAttribute] = useState("");
-  const [confetti, setConfetti] = useState(new ConfettiWorker([]));
-
-  const [popupVisible, setPopupVisible] = useState(false);
-
-  const [okay, setOkay] = useState<boolean>(true);
-  const [countdown, setCountdown] = useState<Countdown>(countdowns[current]);
-  const [currentDateFromCountdown, setDateFromCountdown] = useState<Date>();
-
-  const [preloadImages, setPreloadImages] = useState(countdowns);
+  const [countdown, setCountdown] = useState<CountdownType>();
+  const [countdownIndex, setCountdownIndex] = useState<any[]>([
+    ...countdowns,
+    ...getCustomCountdowns(),
+  ]);
+  const [currentInIndex, setCurrentInIndex] = useState<any>(0);
 
   useEffect(() => {
-    setCountdown(countdowns[current]);
-
-    router.push("/" + current, undefined, { shallow: true });
-  }, [current]);
-
-  useEffect(() => {
-    if (countdown) {
-      setOkay(true);
-
-      setBgImage("/img/" + countdowns[current].backgroundImage);
-      setDark(countdowns[current].useDark);
-      setAttribute(countdowns[current].imageAttribution);
-      setDateFromCountdown(
-        getDateFromCountdown(countdown, new Date(Date.now()))
-      );
-    } else {
-      setOkay(false);
+    if (router.query.id && typeof router.query.id === "string") {
+      if (router.query.id.startsWith("c-")) {
+        setCurrentInIndex(
+          Number(router.query.id.replaceAll("c-", "")) + countdowns.length
+        );
+      } else if (Number(router.query.id) !== NaN) {
+        setCurrentInIndex(Number(router.query.id));
+      } else {
+        console.warn("Invalid countdown");
+      }
     }
-  }, [countdown]);
+  }, [router]);
 
   useEffect(() => {
-    console.log(countdowns);
-    setPreloadImages(countdowns);
-  }, [countdowns]);
+    setCountdown(countdownIndex[currentInIndex]);
 
-  return (
-    <>
-      <Head>
-        <title>
-          {countdown
-            ? `${countdown.name.replace(
-                "{year}",
-                currentDateFromCountdown?.getFullYear() === undefined
-                  ? ""
-                  : String(currentDateFromCountdown?.getFullYear())
-              )} - `
-            : ""}
-          Countdowns
-        </title>
-      </Head>
+    router.push(
+      currentInIndex >= countdowns.length
+        ? `/c-${currentInIndex - countdowns.length}`
+        : `/${currentInIndex}`,
+      undefined,
+      {
+        shallow: true,
+      }
+    );
+  }, [currentInIndex]);
 
-      <Confetti confetti={confetti}></Confetti>
-
-      {/* hacky way to preload images */}
-      <div className={styles.imagePreload}>
-        {preloadImages.map((countdown, idx) => (
-          <Image
-            key={idx}
-            className={styles.image}
-            src={"/img/" + countdown.backgroundImage}
-            layout="fill"
-            objectFit="cover"
-            quality={1}
-            placeholder="empty"
-            loading="eager"
-            priority={true}
-          />
-        ))}
-      </div>
-
-      <Image
-        className={styles.image}
-        src={bgImage}
-        layout="fill"
-        objectFit="cover"
-        quality={1}
-        placeholder="empty"
-        loading="eager"
-        priority={true}
-      ></Image>
-
-      {/* Navigation */}
-      <div className={styles.main}>
-        <div className={styles.container}>
-          {okay ? (
-            <>
-              {/* Large Screen Navigation Left */}
-              <section className={styles.last}>
-                <img
-                  onClick={() => {
-                    if (current > 0) {
-                      setCurrent(Number(current) - 1);
-                    }
-                  }}
-                  style={{ display: current == 0 ? "none" : "block" }}
-                  className={`${styles.icon} ${
-                    usingDark ? undefined : styles.icoInvert
-                  }`}
-                  src="/icons/chevron-left.svg"
-                />
-              </section>
-
-              {/* Main Interest */}
-              <section className={styles.center}>
-                {/* Top (mobile navigations, menu) */}
-                <section className={styles.select}>
-                  {/* Mobile Navigation Left */}
-                  <img
-                    onClick={() => {
-                      if (current > 0) {
-                        setCurrent(Number(current) - 1);
-                      }
-                    }}
-                    style={{
-                      opacity: current == 0 ? 0 : 1,
-                      pointerEvents: current != 0 ? "auto" : "none",
-                    }}
-                    className={`${styles.naviSecondary} ${styles.iconTop} ${
-                      usingDark ? undefined : styles.icoInvert
-                    }`}
-                    src="/icons/chevron-left.svg"
-                  />
-
-                  {/* Menu Button */}
-                  <img
-                    onClick={() => {
-                      setPopupVisible(true);
-                    }}
-                    className={`${styles.iconTop} ${
-                      usingDark ? undefined : styles.icoInvert
-                    }`}
-                    src="/icons/menu.svg"
-                  />
-
-                  {/* Mobile Navigation Right */}
-                  <img
-                    onClick={() => {
-                      if (current < countdowns.length - 1) {
-                        setCurrent(Number(current) + 1);
-                      }
-                    }}
-                    style={{
-                      opacity: current < countdowns.length - 1 ? 1 : 0,
-                      pointerEvents:
-                        current < countdowns.length - 1 ? "auto" : "none",
-                    }}
-                    className={`${styles.naviSecondary} ${styles.iconTop} ${
-                      usingDark ? undefined : styles.icoInvert
-                    }`}
-                    src="/icons/chevron-right.svg"
-                  />
-                </section>
-
-                {/* Counter */}
-                <section className={styles.counter}>
-                  <Counter
-                    countdown={countdown}
-                    use24hour={use24hr}
-                    confetti={confetti}
-                  />
-                </section>
-
-                {/* Footer */}
-                <section
-                  className={`${styles.attr} ${
-                    usingDark ? undefined : styles.white
-                  }`}
-                >
-                  <section className={styles.attributeText}>
-                    {attribute}
-                  </section>
-                  <a href="https://znepb.me">
-                    <img
-                      src={usingDark ? "/znepb/dark.svg" : "/znepb/light.svg"}
-                      height="37px"
-                    />
-                  </a>
-                </section>
-              </section>
-
-              {/* Large Screen Navigation Right */}
-              <section className={styles.next}>
-                <img
-                  onClick={() => {
-                    if (countdowns[current + 1]) {
-                      setCurrent(Number(current) + 1);
-                    }
-                  }}
-                  style={{
-                    display:
-                      current == countdowns.length - 1 ? "none" : "block",
-                  }}
-                  className={`${styles.icon} ${
-                    usingDark ? undefined : styles.icoInvert
-                  }`}
-                  src="/icons/chevron-right.svg"
-                />
-              </section>
-            </>
-          ) : (
-            <>Well, something happened that wasn&apos;t supposed to...</>
-          )}
-        </div>
-      </div>
-
-      {/* Popup */}
-      <div
-        className={styles.popupContainer}
-        style={{ display: popupVisible ? "flex" : "none" }}
-      >
-        <div className={styles.popup}>
-          <section className={styles.popupHeader}>
-            <span>Countdowns</span>{" "}
-            <span
-              style={{ cursor: "pointer", userSelect: "none" }}
+  if (countdown) {
+    return (
+      <>
+        <main
+          className={styles.main}
+          style={{
+            backgroundImage: `url(${countdown.backgroundImage})`,
+          }}
+        ></main>
+        <main
+          className={styles.container}
+          style={{
+            color: countdown.useDark ? "black" : "white",
+          }}
+        >
+          <div className="navi">
+            <div
               onClick={() => {
-                setPopupVisible(false);
+                if (countdownIndex[currentInIndex - 1]) {
+                  setCurrentInIndex(currentInIndex - 1);
+                }
+              }}
+              style={{
+                opacity: countdownIndex[currentInIndex - 1] ? 1 : 0,
+                cursor: countdownIndex[currentInIndex - 1]
+                  ? "pointer"
+                  : "initial",
               }}
             >
-              &times;
-            </span>
-          </section>
-          <section>
-            <div className={styles.pages}>
-              {/*<div
-                onClick={() => {
-                  setPopupVisible(false);
-                }}
-                className={styles.page}
-                style={{
-                  background: "#111",
-                }}
-              >
-                <span style={{ color: "white" }}>Custom</span>
-              </div>*/}
-              {countdowns.map((item, index) => {
-                const date = getDateFromCountdown(item, new Date());
-
-                if (eventIsToday(item, new Date(), date)) {
-                  if (!item.date.year) {
-                    date.setFullYear(date.getFullYear() - 1);
-                  }
+              <ChevronLeft size={48} />
+            </div>
+            <div
+              onClick={() => {
+                setMenuVisible(true);
+              }}
+            >
+              <Menu size={48} />
+            </div>
+            <div
+              onClick={() => {
+                if (countdownIndex[currentInIndex + 1]) {
+                  setCurrentInIndex(currentInIndex + 1);
                 }
-
-                return (
-                  <div
-                    key={index}
-                    onClick={() => {
-                      setCurrent(index);
-                      setPopupVisible(false);
-                    }}
-                    className={styles.page}
-                    style={{
-                      backgroundImage: `url("/_next/image?url=%2Fimg%2F${item.backgroundImage}&w=640&q=75")`,
-                      backgroundPositionY: -item.popoutOffset,
-                    }}
-                  >
-                    <span
-                      style={{ color: !item.useDark ? "white" : undefined }}
-                    >
-                      {item.name.replace(
-                        /{year}/g,
-                        date.getFullYear().toString()
-                      )}
-                    </span>
-                  </div>
-                );
-              })}
+              }}
+              style={{
+                opacity: countdownIndex[currentInIndex + 1] ? 1 : 0,
+                cursor: countdownIndex[currentInIndex + 1]
+                  ? "pointer"
+                  : "initial",
+              }}
+            >
+              <ChevronRight size={48} />
             </div>
-          </section>
-          <section className={styles.popupFooter}>
-            <div className={styles.github}>
-              <a className="blue" href={`/e/${current}`}>
-                Embed Version
-              </a>
+          </div>
+          <div>
+            <Countdown countdown={countdown} />
+          </div>
+          <div style={{ textAlign: "center" }}>
+            {countdown.imageAttribution && (
+              <>Image Attribution: {countdown.imageAttribution}</>
+            )}
+            <div>
+              <b>
+                NOTICE - Countdowns v5 is currently still in development.
+                Current features are not final and are subject to change.
+              </b>
+              <br />
+              If you find any bugs, please report them to me via Discord. You
+              can find my profile on my main website, znepb.me.
             </div>
-            <div className={styles.github}>
-              <span>Copyright © znepb 2022</span>
-            </div>
-            <div className={styles.znepbme}>
-              <a href="https://znepb.me/">Home</a>
-              <span>•</span>
-              <a href="https://lens.znepb.me/">Lens</a>
-              <span>•</span>
-              <a href="https://analytics.znepb.me/">Analytics</a>
-              <span>•</span>
-              <span className={styles.selected}>Countdowns</span>
-              <span>•</span>
-              <a href="https://files.znepb.me/">Files</a>
-            </div>
-            <div className={styles.github}>
-              <a className="blue" href="https://github.com/znepb/countdowns">
-                Check this out on GitHub
-              </a>
-              <span> • v4.6.1</span>
-            </div>
-            <div className={styles.logo}>
-              <a href="https://znepb.me">
-                <img src="/znepb/light.svg" height="28px" />
-              </a>
-            </div>
-          </section>
-        </div>
-      </div>
-    </>
-  );
-};
-
-export async function getStaticPaths() {
-  const paths = countdowns.map((countdown: Countdown, index: number) => ({
-    params: { id: index.toString() },
-  }));
-
-  return {
-    paths,
-    fallback: false,
-  };
+          </div>
+        </main>
+      </>
+    );
+  } else {
+    return (
+      <>
+        Looks like this countdown doesn&apos;t exist.{" "}
+        <button
+          onClick={() => {
+            setCurrentInIndex(0);
+          }}
+        >
+          Reset
+        </button>
+      </>
+    );
+  }
 }
-
-export const getStaticProps = async (context: any) => {
-  return {
-    props: {
-      countdowns: countdowns,
-      id: context.params.id,
-    },
-  };
-};
-
-export default Home;

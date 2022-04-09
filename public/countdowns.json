@@ -1,7 +1,7 @@
 [
   {
     "name": "New Years {year}",
-    "backgroundImage": "newyears.jpg",
+    "backgroundImage": "/img/newyears.jpg",
     "imageAttribution": "Image: WallpaperAccess Free New Year's Eve Backgrounds",
     "useDark": false,
     "popoutOffset": 40,
@@ -13,7 +13,7 @@
   },
   {
     "name": "My Birthday",
-    "backgroundImage": "birthday.jpg",
+    "backgroundImage": "/img/birthday.jpg",
     "imageAttribution": "Image: WallpaperSafari Happy birthday cake wallpaper",
     "useDark": true,
     "popoutOffset": 30,
@@ -25,7 +25,7 @@
   },
   {
     "name": "Kings Island Opening Day",
-    "backgroundImage": "kingsisland.jpg",
+    "backgroundImage": "/img/kingsisland.jpg",
     "imageAttribution": "Image: ©️ Marcus Wenzel 2021",
     "useDark": true,
     "popoutOffset": 0,
@@ -36,14 +36,15 @@
       "time": {
         "hour": 10,
         "minute": 0,
-        "second": 0
+        "second": 0,
+        "timezone": "EDT"
       },
       "useLocalOffset": true
     }
   },
   {
     "name": "Cedar Point Opening Day",
-    "backgroundImage": "cedarpoint.jpg",
+    "backgroundImage": "/img/cedarpoint.jpg",
     "imageAttribution": "Image: Gregory Varnum, CC BY-SA 4.0, via Wikimedia Commons",
     "useDark": false,
     "popoutOffset": 10,
@@ -54,14 +55,15 @@
       "time": {
         "hour": 10,
         "minute": 0,
-        "second": 0
+        "second": 0,
+        "timezone": "EDT"
       },
       "useLocalOffset": true
     }
   },
   {
     "name": "Winter {year}",
-    "backgroundImage": "winter.jpg",
+    "backgroundImage": "/img/winter.jpg",
     "imageAttribution": "Image: Wallpaper Cave, Winter Wallpapers",
     "useDark": true,
     "popoutOffset": 40,
@@ -73,7 +75,7 @@
   },
   {
     "name": "Spring {year}",
-    "backgroundImage": "spring.jpg",
+    "backgroundImage": "/img/spring.jpg",
     "imageAttribution": "Image: WallpaperAccess, Top Free Spring Backgrounds",
     "useDark": true,
     "popoutOffset": 40,
@@ -85,7 +87,7 @@
   },
   {
     "name": "Summer {year}",
-    "backgroundImage": "summer.jpg",
+    "backgroundImage": "/img/summer.jpg",
     "imageAttribution": "Image: Thrive Global, The Beauty of the Summer Months",
     "useDark": true,
     "popoutOffset": 90,
@@ -97,7 +99,7 @@
   },
   {
     "name": "Fall {year}",
-    "backgroundImage": "fall.jpg",
+    "backgroundImage": "/img/fall.jpg",
     "imageAttribution": "Image: Wallpaper Cave, Autumn Wallpapers",
     "useDark": false,
     "popoutOffset": 0,
@@ -109,7 +111,7 @@
   },
   {
     "name": "Easter {year}",
-    "backgroundImage": "easter.jpg",
+    "backgroundImage": "/img/easter.jpg",
     "imageAttribution": "Image: PxHere",
     "useDark": true,
     "popoutOffset": 50,
@@ -121,7 +123,7 @@
   },
   {
     "name": "US Independence Day {year}",
-    "backgroundImage": "july4.jpg",
+    "backgroundImage": "/img/july4.jpg",
     "imageAttribution": "Image: WallpaperAccess, Christmas Wallpapers",
     "useDark": false,
     "popoutOffset": 0,
@@ -133,7 +135,7 @@
   },
   {
     "name": "Halloween {year}",
-    "backgroundImage": "halloween.jpg",
+    "backgroundImage": "/img/halloween.jpg",
     "imageAttribution": "Image: Wallpaper Cave, Halloween Pumpkin Wallpapers",
     "useDark": false,
     "popoutOffset": 70,
@@ -145,7 +147,7 @@
   },
   {
     "name": "Thanksgiving {year}",
-    "backgroundImage": "thanksgiving.jpg",
+    "backgroundImage": "/img/thanksgiving.jpg",
     "imageAttribution": "Image: WallpaperAccess, Thanksgiving Wallpapers",
     "useDark": false,
     "popoutOffset": 80,
@@ -157,7 +159,7 @@
   },
   {
     "name": "Christmas {year}",
-    "backgroundImage": "christmas.jpg",
+    "backgroundImage": "/img/christmas.jpg",
     "imageAttribution": "Image: WallpaperAccess, Christmas Wallpapers",
     "useDark": false,
     "popoutOffset": 60,

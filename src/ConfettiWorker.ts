@@ -1,5 +1,5 @@
-import React, { Component } from 'react';
-import { CreateTypes } from 'canvas-confetti';
+import React, { Component } from "react";
+import { CreateTypes } from "canvas-confetti";
 
 function randomInRange(min: number, max: number): number {
   return Math.random() * (max - min) + min;
@@ -24,14 +24,15 @@ export default class Fireworks extends Component {
       particleCount: 150,
       origin: {
         x: randomInRange(originXA, originXB),
-        y: Math.random() - 0.2
-      }
-    }
+        y: Math.random() - 0.2,
+      },
+    };
   }
 
-  nextTickAnimation =()=> {
-    this.animationInstance && this.animationInstance(this.getAnimationSettings(0, 1));
-  }
+  nextTickAnimation = () => {
+    this.animationInstance &&
+      this.animationInstance(this.getAnimationSettings(0, 1));
+  };
 
   startAnimation() {
     if (!this.isAnimationEnabled) {
@@ -57,6 +58,6 @@ export default class Fireworks extends Component {
   }
 
   getInstance = (instance: CreateTypes | null) => {
-    this.animationInstance = instance
-  }
+    this.animationInstance = instance;
+  };
 }
