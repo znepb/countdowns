@@ -436,15 +436,6 @@ export default function Countdowns({ setMenuVisible }: any) {
           style={{ textAlign: "center", color: useDark ? "black" : "white" }}
         >
           {" "}
-          <div>
-            <b>
-              NOTICE - Countdowns v5 is currently still in development. Current
-              features are not final and are subject to change.
-            </b>
-            <br />
-            If you find any bugs, please report them to me via Discord. You can
-            find my profile on my main website, znepb.me.
-          </div>
         </div>
       </main>
     </>

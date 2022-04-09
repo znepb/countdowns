@@ -108,15 +108,6 @@ export default function Countdowns({ setMenuVisible }: any) {
             {countdown.imageAttribution && (
               <>Image Attribution: {countdown.imageAttribution}</>
             )}
-            <div>
-              <b>
-                NOTICE - Countdowns v5 is currently still in development.
-                Current features are not final and are subject to change.
-              </b>
-              <br />
-              If you find any bugs, please report them to me via Discord. You
-              can find my profile on my main website, znepb.me.
-            </div>
           </div>
         </main>
       </>
